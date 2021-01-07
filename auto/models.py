@@ -5,6 +5,7 @@ from datetime import datetime
 from django_countries.fields import CountryField
 import os
 
+# Модель регистрации клиента
 
 class Profile(models.Model):
     STATUS_CHOICES = (
@@ -75,6 +76,8 @@ class Profile(models.Model):
     phoneNumberSub = models.CharField(max_length=150, verbose_name="Дополнительный номер")
     secretWord = models.CharField(max_length=150, blank=True, verbose_name="Секретное слово")
 
+
+
     #Оплата рассрочки
 
 
@@ -84,7 +87,16 @@ class Profile(models.Model):
     # def __str__(self):
     #     return 'Profile for user {}'.format(self.user.username)
 
+# Клиенты какого либо партнера
+# class UserList(models.Model):
+#     first_name = models.CharField(max_length=200, blank=True, verbose_name="Имя")
+#     last_name = models.CharField(max_length=200, blank=True, verbose_name="Фамилия")
+    
+#     class Meta:
+#         verbose_name="Мой клиент"
+#         verbose_name_plural="Мои клиенты"
 
+# Модель регистрации партнера
 class Partner(models.Model):
     userPartner = models.CharField(max_length=20, verbose_name="Логин")
     # userPartner = models.DateTimeField(str(datetime.now())[0:16].replace(":", ""))
@@ -108,3 +120,62 @@ class Partner(models.Model):
         verbose_name_plural="Партнеры"
     # def __str__(self):
     #     return 'Partner for user {}'.format(self.user.username)
+
+
+class Ads(models.Model):
+
+    ads = models.TextField(max_length=500,verbose_name="Содержание")
+
+    class Meta:
+        verbose_name="Объявление"
+        verbose_name_plural="Объявления"
+
+
+# Поля об акциях для клиентов и партнеров
+class SharesFirst(models.Model):
+    SharesTitle = models.CharField(max_length=50,verbose_name="Название")
+    SharesUpload = models.FileField(upload_to='uploads/', verbose_name="Выбрать файл")
+    SharesDateStart = models.DateTimeField(blank=True, verbose_name="Начало")
+    SharesDateEnd = models.DateTimeField(blank=True, verbose_name="Конец")
+    ClientsShares = models.TextField(max_length=500,verbose_name="Акции для клиентов")
+
+    class Meta:
+        verbose_name=""
+        verbose_name_plural="Акции для клиентов"
+
+
+class SharesSecond(models.Model):
+    SharesTitleSecond = models.CharField(max_length=50,verbose_name="Название")
+    SharesUploadSecond = models.FileField(upload_to='uploads/', verbose_name="Выбрать файл")
+    SharesDateStartSecond = models.DateTimeField(blank=True, verbose_name="Начало")
+    SharesDateEndSecond = models.DateTimeField(blank=True, verbose_name="Конец")
+    PartnersSharesSecond = models.TextField(max_length=500,verbose_name="Акции для клиентов")
+
+    class Meta:
+        verbose_name=""
+        verbose_name_plural="Акции для партнеров"        
+
+class Lawyer(models.Model):
+    lawyerName = models.CharField(max_length=50,verbose_name="Имя")
+    lawyerSirName = models.CharField(max_length=50, verbose_name="Фамилия")
+    lawyerPatronymic = models.CharField(max_length=50,verbose_name="Отчество")
+    lawyerEmail = models.EmailField(max_length=50, blank=True, verbose_name="Адрес электронной почты")
+    lawyerPhoneNUmber = models.CharField(max_length=50, verbose_name="Телефон")
+    lawyerPassword = models.CharField(max_length=255, blank=True, verbose_name="Пароль")
+    lawyerPasswordRepeat = models.CharField(max_length=255, blank=True, verbose_name="Повторите пароль")
+
+    class Meta:
+        verbose_name="Юрист"
+        verbose_name_plural="Юристы"    
+
+class Accountant(models.Model):
+    accountantName = models.CharField(max_length=50,verbose_name="Имя")
+    accountantSirName = models.CharField(max_length=50, verbose_name="Фамилия")
+    accountantPatronymic = models.CharField(max_length=50,verbose_name="Отчество")
+    accountantEmail = models.EmailField(max_length=50, blank=True, verbose_name="Адрес электронной почты")
+    accountantPhoneNUmber = models.CharField(max_length=50, verbose_name="Телефон")
+    accountantPassword = models.CharField(max_length=255, blank=True, verbose_name="Пароль")
+    accountantPasswordRepeat = models.CharField(max_length=255, blank=True, verbose_name="Повторите пароль")
+    class Meta:
+        verbose_name="Бухгалтеры"
+        verbose_name_plural="Бухгалтер"           
