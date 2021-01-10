@@ -140,7 +140,7 @@ class SharesFirst(models.Model):
     ClientsShares = models.TextField(max_length=500,verbose_name="Акции для клиентов")
 
     class Meta:
-        verbose_name=""
+        verbose_name="Акции для клиентов"
         verbose_name_plural="Акции для клиентов"
 
 
@@ -152,7 +152,7 @@ class SharesSecond(models.Model):
     PartnersSharesSecond = models.TextField(max_length=500,verbose_name="Акции для клиентов")
 
     class Meta:
-        verbose_name=""
+        verbose_name="Акции для партнеров"
         verbose_name_plural="Акции для партнеров"        
 
 class Lawyer(models.Model):
@@ -166,7 +166,7 @@ class Lawyer(models.Model):
 
     class Meta:
         verbose_name="Юрист"
-        verbose_name_plural="Юристы"    
+        verbose_name_plural="Юрист"    
 
 class Accountant(models.Model):
     accountantName = models.CharField(max_length=50,verbose_name="Имя")
@@ -177,5 +177,5 @@ class Accountant(models.Model):
     accountantPassword = models.CharField(max_length=255, blank=True, verbose_name="Пароль")
     accountantPasswordRepeat = models.CharField(max_length=255, blank=True, verbose_name="Повторите пароль")
     class Meta:
-        verbose_name="Бухгалтеры"
+        verbose_name="Бухгалтер"
         verbose_name_plural="Бухгалтер"           
