@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from .models import *
+from .models import Feedback
 
 
 class LoginForm(forms.Form):
@@ -48,3 +49,10 @@ class PartnerEditForm(forms.ModelForm):
         fields = ('userPartner' ,'namePartner', 'sirNamePartner', 'patronymicPartner', 'phonePartner', 'emailPartner',
                   'adressPartner', 'secretWordPartner', 'passwordPartner', 'passwordRepeatPartner', 'docNumberPartner',
                   'gavePartner', 'datePartner', 'upload')
+
+
+
+class FeedbackForm(forms.ModelForm):
+    class Meta:
+	    model = Feedback
+	    fields = ['phoneNumber', 'name', 'text']

@@ -122,6 +122,14 @@ class Partner(models.Model):
     #     return 'Partner for user {}'.format(self.user.username)
 
 
+class PartnerUsers(models.Model):
+    userPartner = models.ForeignKey(Partner, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name="Зарегистрированный пользователь"
+        verbose_name_plural="Зарегистрированные пользователи"
+ 
+
 class Ads(models.Model):
 
     ads = models.TextField(max_length=500,verbose_name="Содержание")
@@ -178,4 +186,16 @@ class Accountant(models.Model):
     accountantPasswordRepeat = models.CharField(max_length=255, blank=True, verbose_name="Повторите пароль")
     class Meta:
         verbose_name="Бухгалтер"
-        verbose_name_plural="Бухгалтер"           
+        verbose_name_plural="Бухгалтер"
+
+
+
+
+class Feedback(models.Model):
+	name = models.CharField(verbose_name='ФИО', max_length= 30)
+	phoneNumber = models.CharField(verbose_name='Номер телефона', max_length= 100)
+	text = models.TextField(verbose_name='Сообщение')
+
+
+	# def __str__(self):
+	# 	return self.mail        

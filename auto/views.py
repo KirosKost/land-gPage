@@ -5,7 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import *
 from .models import *
-
+from django.views import View
+from .forms import FeedbackForm
 
 def user_login(request):
     if request.method == 'POST':
@@ -95,3 +96,26 @@ def editPartner(request):
                   'auto/edit.html',
                   {'user_form': user_form,
                    'partner_form': partner_form})
+
+
+
+
+class FeedbackView(View):
+    
+    def post(self, request):
+        
+        if request.method == 'POST':
+            form = FeedbackForm(request.POST)
+            # print(request.POST)
+        if form.is_valid():
+            form.save()
+            phoneNumber = form.cleaned_data['phoneNumber']
+            name = form.cleaned_data['name']
+            text = form.cleaned_data['text']
+            subject = 'Новое сообщение'
+            # from_email = 'kiroskost@gmail.com'
+            # to_email = ['kiroskost@gmail.com', 'kirosbush@gmail.com']
+            message = 'Новая заявка!' + '\r\n' + '\r\n' + 'Номер телефона: ' + phoneNUmber + '\r\n' + '\r\n' + 'ФИО:' + name + '\r\n' + 'Сообщение' + text
+            # send_mail(subject, message, from_email, to_email, fail_silently=False)
+            bot.send_message(628980737, message)
+        return redirect('home')	

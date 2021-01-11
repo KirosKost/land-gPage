@@ -44,4 +44,14 @@ class Lawyer(admin.ModelAdmin):
 @admin.register(Accountant)
 class Accountant(admin.ModelAdmin):
     list_display = ['accountantName', 'accountantSirName', 'accountantPatronymic', 'accountantEmail', 'accountantPhoneNUmber',
-                    'accountantPassword', 'accountantPasswordRepeat']                            
+                    'accountantPassword', 'accountantPasswordRepeat']
+
+
+@admin.register(PartnerUsers)
+class PartnerUsers(admin.ModelAdmin):
+    list_display = ['userPartner']
+
+
+
+
+    
