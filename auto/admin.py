@@ -2,8 +2,6 @@ from django.contrib import admin
 from .models import *
 
 
-
-
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'sirName', 'patronymic', 'sex', 'birthDate', 'country', 'docs',
@@ -54,4 +52,6 @@ class PartnerUsers(admin.ModelAdmin):
 
 
 
-    
+@admin.register(VerificationOfDocuments)
+class VerificationOfDocuments(admin.ModelAdmin):
+    list_display = ['applicationForMembership', 'passportSides', 'addressReference']    

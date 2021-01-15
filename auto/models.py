@@ -24,9 +24,9 @@ class Profile(models.Model):
         ('village', 'Поселок'),
         ('urbanTypeSettlement', 'Поселок городского типа'),
     )
+
+       
     userClient = models.CharField(max_length=20 ,verbose_name="Логин")
-    # user = models.DateTimeField(str(datetime.now())[0:16].replace(":", ""))
-    # user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.CharField(max_length=50, blank=True, verbose_name="Имя")
     sirName = models.CharField(max_length=50, blank=True, verbose_name="Фамилия")
     patronymic = models.CharField(max_length=30, verbose_name="Отчество/по паспорту")
@@ -41,8 +41,7 @@ class Profile(models.Model):
     postalCode = models.CharField(max_length=30, blank=True, verbose_name="индекс")
     region = models.CharField(max_length=50, verbose_name="Регион")
     district = models.CharField(max_length=50, verbose_name="Район")
-    settlement = models.CharField(max_length=30, choices=TYPE_OF_SETTLEMENT, default='Город',
-                                  verbose_name="Название населенного пункта")
+    settlement = models.CharField(max_length=30, choices=TYPE_OF_SETTLEMENT, default='Город',verbose_name="Название населенного пункта")
     settlementName = models.CharField(max_length=50, blank=True, verbose_name="Название населенного пункта")
     street = models.CharField(max_length=50, blank=True, verbose_name="Название улицы")
     buildingNumber = models.CharField(max_length=10, blank=True, verbose_name="Номер дома")
@@ -56,8 +55,7 @@ class Profile(models.Model):
     postalCode_f = models.CharField(max_length=30, blank=True, verbose_name="индекс")
     region_f = models.CharField(max_length=50, verbose_name="Регион")
     district_f = models.CharField(max_length=50, verbose_name="Район")
-    settlement_f = models.CharField(max_length=30, choices=TYPE_OF_SETTLEMENT, default='Город',
-                                    verbose_name="Название населенного пункта")
+    settlement_f = models.CharField(max_length=30, choices=TYPE_OF_SETTLEMENT, default='Город',verbose_name="Название населенного пункта")
     settlementName_f = models.CharField(max_length=50, blank=True, verbose_name="Название населенного пункта")
     street_f = models.CharField(max_length=50, blank=True, verbose_name="Название улицы")
     buildingNumber_f = models.CharField(max_length=10, blank=True, verbose_name="Номер дома")
@@ -65,11 +63,9 @@ class Profile(models.Model):
     apartment_f = models.CharField(max_length=20, verbose_name="Квартира")
 
     employmentType = models.CharField(max_length=20, blank=True, verbose_name="Тип занятости")
-    income = models.IntegerField(blank=True,
-                                 verbose_name="Среднемесячный доход за последние 6 месяцев за вычетом налогов, сом")
-    familyIncome = models.IntegerField(blank=True,
-                                       verbose_name="Среднемесячный совокупный доход семьи за последние 6 месяцев, сом")
-
+    income = models.IntegerField(blank=True,verbose_name="Среднемесячный доход за последние 6 месяцев за вычетом налогов, сом")
+    familyIncome = models.IntegerField(blank=True,verbose_name="Среднемесячный совокупный доход семьи за последние 6 месяцев, сом")
+    
     password = models.CharField(max_length=255, blank=True, verbose_name="Пароль")
     passwordRepeat = models.CharField(max_length=255, blank=True, verbose_name="Повторите пароль")
     phoneNumber2 = models.CharField(max_length=150, blank=True, verbose_name="Номер телефона")
@@ -88,18 +84,17 @@ class Profile(models.Model):
     #     return 'Profile for user {}'.format(self.user.username)
 
 # Клиенты какого либо партнера
-# class UserList(models.Model):
-#     first_name = models.CharField(max_length=200, blank=True, verbose_name="Имя")
-#     last_name = models.CharField(max_length=200, blank=True, verbose_name="Фамилия")
+class UserList(models.Model):
+    first_name = models.CharField(max_length=200, blank=True, verbose_name="Имя")
+    last_name = models.CharField(max_length=200, blank=True, verbose_name="Фамилия")
     
-#     class Meta:
-#         verbose_name="Мой клиент"
-#         verbose_name_plural="Мои клиенты"
+    class Meta:
+        verbose_name="Мой клиент"
+        verbose_name_plural="Мои клиенты"
 
 # Модель регистрации партнера
 class Partner(models.Model):
     userPartner = models.CharField(max_length=20, verbose_name="Логин")
-    # userPartner = models.DateTimeField(str(datetime.now())[0:16].replace(":", ""))
     namePartner = models.CharField(max_length=50, blank=True, verbose_name="Имя")
     sirNamePartner = models.CharField(max_length=50, blank=True, verbose_name="Фамилия")
     patronymicPartner = models.CharField(max_length=30, verbose_name="Отчество/по паспорту")
@@ -184,6 +179,8 @@ class Accountant(models.Model):
     accountantPhoneNUmber = models.CharField(max_length=50, verbose_name="Телефон")
     accountantPassword = models.CharField(max_length=255, blank=True, verbose_name="Пароль")
     accountantPasswordRepeat = models.CharField(max_length=255, blank=True, verbose_name="Повторите пароль")
+    
+    
     class Meta:
         verbose_name="Бухгалтер"
         verbose_name_plural="Бухгалтер"
@@ -199,3 +196,27 @@ class Feedback(models.Model):
 
 	# def __str__(self):
 	# 	return self.mail        
+
+
+
+class VerificationOfDocuments(models.Model):
+    applicationForMembership = models.FileField(upload_to='media/uploads/', verbose_name="Заявление о вступлении")
+    passportSides = models.FileField(upload_to='media/uploads/', verbose_name="Паспорт - лицевая и обратная сторона на одной странице")
+    addressReference = models.FileField(upload_to='media/uploads/', verbose_name="Адресная справка - с ЦОН")
+
+    class Meta:
+        verbose_name="Документы"
+        verbose_name_plural="Документ"
+
+
+
+class MakeAPayment(models.Model):
+    PAYMENT_CHOICES = (
+    ('bank', 'Банковский'),
+    ('cash', 'Наличные'),
+    ) 
+
+    entranceFee = models.IntegerField(blank=True,verbose_name="Сумма взноса")
+    dateOfPayment = models.DateField(null=True, blank=True, verbose_name="Дата платежа")
+    paymentMethod = models.CharField(max_length=30, choices=PAYMENT_CHOICES, default='Банковский',verbose_name="Метод оплаты")
+    document = models.FileField(upload_to='uploads/', verbose_name="Обзор...")

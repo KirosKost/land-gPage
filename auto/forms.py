@@ -10,10 +10,8 @@ class LoginForm(forms.Form):
 
 
 class UserRegistrationForm(forms.ModelForm):
-    password = forms.CharField(label='Password',
-                               widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Repeat password',
-                                widget=forms.PasswordInput)
+    password = forms.CharField(label='Password', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Repeat password',widget=forms.PasswordInput)
 
     class Meta:
         model = User
@@ -56,3 +54,24 @@ class FeedbackForm(forms.ModelForm):
     class Meta:
 	    model = Feedback
 	    fields = ['phoneNumber', 'name', 'text']
+
+
+class VerificationOfDocumentsForm(forms.ModelForm):
+    class Meta:
+        model = VerificationOfDocuments
+        fields = ['applicationForMembership', 'passportSides', 'addressReference']
+
+
+
+class MakeAPaymentForm(forms.ModelForm):
+    class Meta:
+        model = MakeAPayment       
+        fields = ['entranceFee', 'dateOfPayment', 'paymentMethod', 'document']
+
+
+
+class UserList(forms.ModelForm):
+    class Meta:
+        model = UserList
+        fields = ['first_name', 'last_name']        
+        
